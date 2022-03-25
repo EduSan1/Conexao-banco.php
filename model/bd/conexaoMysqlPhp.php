@@ -32,6 +32,12 @@
 
     }
 
+    function fecharConexaoMysql ($conexao){
+
+        mysqli_close($conexao);
+
+    }
+
     /*existem 3 formas de criar a conexão com o bd:
 
     mysql_connet(); - antiga, não é muito segura e não oferece performance
