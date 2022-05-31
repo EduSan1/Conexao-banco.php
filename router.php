@@ -26,15 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
             //verifica o action passado para o action
             if ($action == 'INSERIR') {
 
-                var_dump($_FILES);
-                die;
 
                 if (isset($_FILES) && !empty($_FILES)) {
+
+                    $arrayDados = array(
+                        $_POST,
+                        "file" => $_FILES
+                    );
                     //passa o objeto post para a verificação na controller
-                    $resposta = inserirContato($_POST, $_FILES);
+                    $resposta = inserirContato($arrayDados);
                 } else {
+                    $arrayDados = array(
+                        $_POST,
+                        "file" => null
+                    );
                     //passa o objeto post para a verificação na controller
-                    $resposta = inserirContato($_POST, null);
+                    $resposta = inserirContato($arrayDados);
                 }
 
 
@@ -72,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
                     "id" => $id,
                     "foto" => $foto
                 );
-                
+
                 $resposta = excluirContato($arrayDados);
 
                 if (is_bool($resposta)) {
@@ -115,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
                 $idContato = $_GET['id'];
                 $foto = $_GET['foto'];
 
-                $arrayDados = array (
+                $arrayDados = array(
                     'id' => $idContato,
                     'foto' => $foto,
                     'file' => $_FILES

@@ -23,12 +23,10 @@ $url = explode('/',$urlHTTP);
     switch(strtoupper($url[0])) {
         case'CONTATOS':
             require_once('contatosApi/index.php');
+        break;
         case'ESTADOS':
             require_once('estadosApi/index.php');
         break;
     }
-
-var_dump($url);
-die;
 
 ?>

@@ -11,7 +11,7 @@ Versão 1.0
 //Realiza o upload de imagem :)
 function uploadFile($arrayFile)
 {
-    require_once('module/config.php');
+    require_once(SRC.'module/config.php');
 
     $file = $arrayFile;
     $sizeFile = (int) 0;
@@ -40,7 +40,7 @@ function uploadFile($arrayFile)
 
                 $photo = $nameEncrypted . "." . $extension;
 
-                if (move_uploaded_file($tempFile, DIRECTORY_FILE_UPLOAD . $photo)) {
+                if (move_uploaded_file($tempFile, SRC.DIRECTORY_FILE_UPLOAD . $photo)) {
 
                     return $photo;
                 } else {

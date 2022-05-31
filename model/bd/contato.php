@@ -103,7 +103,8 @@ function selectAllContato(){
 
     //script para listar todos os dados da tabela do DB
     /*asc *//*desc */
-    $sql = "select tblcontatos.*,tblestado.nome,tblestado.sigla from tblcontatos inner join tblestado on tblcontatos.idestado = tblestado.idestado";
+    // $sql = "select tblcontatos.*,tblestado.nome,tblestado.sigla from tblcontatos inner join tblestado on tblcontatos.idestado = tblestado.idestado";
+    $sql = "select * from tblcontatos order by idcontato desc";
 
     //quando mandamos um script pro banco que seja insert delete ou update eles n retornam nada
     //o select por outro lado retorna os dados 
@@ -156,10 +157,11 @@ function selectByIdContato($id){
 
 
     $result = mysqli_query($conexao, $sql);
+ 
 
     if ($result) {
-
         if ($rsDados = mysqli_fetch_assoc($result)) {
+            
             $arrayDados = array(
                 "id"       => $rsDados['idcontato'],
                 "nome"       => $rsDados['nome'],
@@ -170,11 +172,12 @@ function selectByIdContato($id){
                 "observacao" => $rsDados['observacao'],
                 'nomeFoto' => $rsDados['foto']
             );
-        };
+             return $arrayDados;
+        }else {
+            return false;
+        }
         fecharConexaoMysql($conexao);
-
-        return $arrayDados;
-
+        
     } else {
         fecharConexaoMysql($conexao);                        
         return array(
